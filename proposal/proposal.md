@@ -63,3 +63,6 @@ Tutor Main Page:
 
 ![tutor main page](images/tutorMain.png)
 
+Chat Window:
+
+![chat window](images/chatWindow.png)
