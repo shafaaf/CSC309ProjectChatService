@@ -66,3 +66,7 @@ Tutor Main Page:
 Chat Window:
 
 ![chat window](images/chatWindow.png)
+
+Search:
+
+![search page](images/search.png)
