@@ -53,6 +53,6 @@ Sketches
 
 Landing Page:
 
-![landing page](./images/landingPage)
+![landing page](images/landingPage.png)
 
 
