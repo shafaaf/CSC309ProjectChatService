@@ -55,4 +55,11 @@ Landing Page:
 
 ![landing page](images/landingPage.png)
 
+Student Main Page:
+
+![student main page](images/studentMain.png)
+
+Student Main Page:
+
+![student main page](images/studentMain.png)
 
