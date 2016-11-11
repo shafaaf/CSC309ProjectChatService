@@ -51,4 +51,8 @@ Google calendar API to schedule events between the various users.
 Sketches
 --------
 
+Landing Page:
+
+![landing page](images/landingPage)
+
 
