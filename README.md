@@ -1,8 +1,5 @@
 Project
 =======
 
-Proposal
---------
-
-See the proposal [here](proposal/proposal.md)
+[proposal](proposal/proposal.md)
 

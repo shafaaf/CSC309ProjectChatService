@@ -4,21 +4,51 @@ CSC309 - Project Proposal
 Application Description
 -----------------------
 
-TODO - A paragraph or two describing the topic of your application. What is the
-overall purpose of your application? Who does it serve? Explain at a high level
-what users will be able to do using your application.
+Our web application will be a tutoring/mentoring service where students can sign
+up and get help in different subject areas from tutors who have experience in
+that specific subject area. Upon logging in, students will be able to search for
+tutors based on a specific subject (or by name), and open a chat dialog with
+them, send them private messages, or continue conversations from previous
+messages. When students have received help with their work, they can rate the
+experience they had with the particular tutor to provide feedback for future
+students. Once tutors have enough ratings they will have the option of offering
+a paid service to students to give them an incentive to provide the best
+tutoring possible.
 
 User Interactions
 -----------------
 
-TODO - A detailed list of the user interactions with the application. How will
-you get data into your application? What are all the different things a user
-will do when they use your application?
+Administrators can:
+* Interact directly with the database using a web interface to perform tasks
+  such as create new users, modify existing users, viewing usage statistics
+* Perform administrative tasks such as reviewing the qualifications of tutors,
+  or handling tutor profiles with poor performace.
+
+Tutors can:
+* Register an account with the website, and login to the website.
+* Edit their profile including personal information, tutoring qualifications,
+  updating passwords, etc.
+* View notifications for events, such as upcoming calendar events, private
+  messages from students, or other tutors.
+* Participate in chats with students both individual and in a group.
+* Send and view private messages.
+* Schedule calendar events with students.
+
+Students can:
+* Register an account with the website, and login to the website.
+* Edit their profile including personal information, current learning interests,
+  updating passwords, etc.
+* View notifications for events, such as upcoming calendar events, private
+  messages from tutors or other students, etc.
+* Participate in chats with students both individual and in a group.
+* Rate tutors based on their performance.
+* Send and view private messages.
+* Schedule calendar events with tutors.
+
+Additionally, we're likely to implement login via Google/Facebook, and use the
+Google calendar API to schedule events between the various users.
 
 Sketches
 --------
 
-TODO - Sketches of what the views will look like to the user. These do not have
-to be fancy polished drawings, or HTML mockups. They must be legible, but they
-could be scanned hand drawings.
 
