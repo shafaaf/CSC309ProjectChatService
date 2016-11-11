@@ -45,8 +45,13 @@ Students can:
 * Send and view private messages.
 * Schedule calendar events with tutors.
 
-Additionally, we're likely to implement login via Google/Facebook, and use the
-Google calendar API to schedule events between the various users.
+Additional Features
+-------------------
+
+* Email notifications
+* Facebook/Google login
+* Calendar event management with Google API
+* Real time chat service
 
 Sketches
 --------
