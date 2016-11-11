@@ -59,7 +59,7 @@ Student Main Page:
 
 ![student main page](images/studentMain.png)
 
-Student Main Page:
+Tutor Main Page:
 
-![student main page](images/studentMain.png)
+![tutor main page](images/tutorMain.png)
 
