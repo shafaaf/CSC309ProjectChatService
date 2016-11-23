@@ -2,12 +2,13 @@
 //See this link to understand logic: http://stackoverflow.com/questions/5178334/folder-structure-for-a-node-js-project
 
 //Adding in dependencies
-
 var express = require('express');
+var session = require('express-session');
 var app = express();
 var http = require('http').Server(app);
 var path = require('path');
 var io = require('socket.io')(http)
+var bodyParser = require('body-parser');
 
 //-----------------------------------------------------------------------
 
@@ -16,8 +17,18 @@ var io = require('socket.io')(http)
 app.use(express.static('public'));	//to use public folder for js, css stuff
 app.set('views', path.join(__dirname, 'views')); //add in views folder to find ejs files
 app.set('view engine', 'ejs'); // set up ejs for as templating engine
+app.use(session({
+	secret: 'aBFvZw82sHRPvX7L',
+	resave: false,
+	saveUninitialized: false
+}));
 
 //app.set('controllers', path.join(__dirname, 'controllers')); //add in views folder to find ejs files
+
+app.use(bodyParser.json());   
+app.use(bodyParser.urlencoded({
+	extended: true
+})); 
 
 //-----------------------------------------------------------------------
 
@@ -34,9 +45,11 @@ require('./routes.js')(app);
 //Chat room logic
 
 //If get error here its because mongodb not installed on your machin, so comment out this line.
-require('./controllers/chatRoom.js')(app, http, io);  
+//require('./controllers/chatRoom.js')(app, http, io);  
 
 //...more features here
+//require('./controllers/home.js')(app);  
+
 
 //-----------------------------------------------------------------------
 
