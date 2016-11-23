@@ -17,19 +17,20 @@ module.exports = function(app) {
 	//Add in more routes like above...
 	app.post('/register', home.postUser);
 	
-	app.post('/signin', home.postSignin);
+	app.post('/login/signin', home.postSignin);
 	
-	app.get('/github', home.getGithub);
+	app.get('/login/github', home.getGithub);
 	
-	app.get('/callback/github', home.getCallback);
+	app.get('/login/google', home.getGoogle);
 	
-	app.get(/auth/, home.getAuth);
+	app.get('/callback/github', home.getCallbackGithub);
+	
+	app.get('/callback/google', home.getCallbackGoogle);
+	
+	app.get('/auth/github?', home.getAuthGithub);
+	
+	app.get('/auth/google?', home.getAuthGoogle);
 	
 	app.get('/session', home.getSession);
 	
-	app.get('/google', home.getGoogle);
-	
-	app.get(/callbackGoogle/, home.getCallbackGoogle);
-	
-	app.get(/googleA/, home.getGoogleAuth);
 }

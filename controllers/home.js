@@ -35,7 +35,7 @@ var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(
 	'731364416241-eufkgv278pcgd7l3dujr7bi1huqt9l0k.apps.googleusercontent.com',
 	'3RFWTeIOOxFtT8DC5F9wkKrC',
-	'http://127.0.0.1:3000/callbackGoogle'
+	'http://127.0.0.1:3000/callback/google'
 );
 
 var googleUrl = oauth2Client.generateAuthUrl({
@@ -96,7 +96,7 @@ exports.getGithub = function (req, res) {
 	res.send({'redirect': authorization_uri_github});
 }
 
-exports.getCallback = function (req, res) {
+exports.getCallbackGithub = function (req, res) {
 	var para = url.parse(req.url, true);
 	var code = para.query.code;
 	
@@ -108,13 +108,13 @@ exports.getCallback = function (req, res) {
 	function saveToken(error, result) {
 		if (error) { console.log('Access Token Error', error.message); }
 		token = oauth2Github.accessToken.create(result);
-		res.redirect('/auth/' + token.token);
+		res.redirect('/auth/github?' + token.token);
 	}
 }
 
-exports.getAuth = function (req, res) {
+exports.getAuthGithub = function (req, res) {
 	var path = (url.parse(req.url, true)).path;
-	var tok = path.split('/')[2];
+	var tok = path.split('?')[1];
 	
 	github.authenticate({
 		type: "oauth",
@@ -145,12 +145,12 @@ exports.getCallbackGoogle = function (req, res) {
 	oauth2Client.getToken(req.query.code, function (err, tokens) {
 		if (!err) {
 			oauth2Client.setCredentials(tokens);
-			res.redirect('/googleA/?id=' + tokens.id_token);
+			res.redirect('/auth/google?id=' + tokens.id_token);
 		}
 	});
 }
 
-exports.getGoogleAuth = function (req, res) {
+exports.getAuthGoogle = function (req, res) {
 	//console.log(req.query.id);
 	var options = {
 		url: 'https://www.googleapis.com/oauth2/v1/tokeninfo?id_token=' + req.query.id,

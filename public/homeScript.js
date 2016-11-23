@@ -23,7 +23,7 @@ function clickLogIn() {
 	var password = ($('.email-login').find('input[type=password]')).val();
 	
 	$.ajax({
-		url: '\/signin',
+		url: '\/login\/signin',
 		method: 'POST',
 		data: {email, password}
 	}).done(function() {
@@ -53,7 +53,7 @@ function clickSignUp() {
 
 function clickGithub() {
 	$.ajax({
-		url: '\/github',
+		url: '\/login\/github',
 		method: 'GET'
 	}).done(function(jsondata) {
 		if (jsondata.redirect) {
@@ -64,7 +64,7 @@ function clickGithub() {
 
 function clickGoogle() {
 	$.ajax({
-		url: '\/google',
+		url: '\/login\/google',
 		method: 'GET'
 	}).done(function(jsondata) {
 		if (jsondata.redirect) {
