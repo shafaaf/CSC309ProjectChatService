@@ -1,1 +1,4 @@
-chat system for project
+Project
+=======
+
+[proposal](proposal/proposal.md)
