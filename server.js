@@ -10,6 +10,7 @@ var path = require('path');
 var io = require('socket.io')(http)
 var bodyParser = require('body-parser');
 
+
 //-----------------------------------------------------------------------
 
 //Setup application
@@ -20,11 +21,17 @@ app.set('view engine', 'ejs'); // set up ejs for as templating engine
 
 //app.set('controllers', path.join(__dirname, 'controllers')); //add in views folder to find ejs files
 
-app.use(session({
+var sessionMiddleware = (session({
 	secret: 'aBFvZw82sHRPvX7L',
 	resave: false,
 	saveUninitialized: false
 }));
+
+io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
+
+app.use(sessionMiddleware);
 
 //app.set('controllers', path.join(__dirname, 'controllers')); //add in views folder to find ejs files
 

@@ -9,10 +9,21 @@ module.exports = function(app) {
         res.sendFile('views/home/home.html', {root: __dirname});
     });
 
-    //Chat room page
-	app.get('/chatroom', function(req, res){
-	  res.render('chatRoom/chatRoom.ejs');
+    //Messaging stuff
+    app.get('/messages', function(req, res){
+	  res.render('messages/messages.ejs');
 	});
+	
+    app.get('/mymessages', function(req, res){
+	  res.render('messages/myMessages.ejs');
+	});
+
+
+    app.get('/chat', function(req, res){
+	  res.render('messages/chat.ejs');
+	});
+	
+
 
 	//Add in more routes like above...
 	app.post('/register', home.postUser);
