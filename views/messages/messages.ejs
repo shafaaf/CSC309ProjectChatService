@@ -1,42 +1,42 @@
-<!-- views/login.ejs -->
-<!doctype html>
+ <!DOCTYPE html>
 <html>
-<head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
-</head>
-<body>
-<div class="container">
+	<head>
+		<title>Messages</title>
+		<link rel = "stylesheet" href = "/messages/messages.css">
 
-<div class="col-sm-6 col-sm-offset-3">
+		<!-- Latest compiled and minified Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <h1><span class="fa fa-sign-in"></span> Login</h1>
+	</head>
+	
+	<body>
+		<div class="row">
+			<div class = "participantList" id = "participantList">
+			</div>	
+		</div>	
 
-    <!-- LOGIN FORM -->
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
-        </div>
+		<div class="row">
+			  <div class="col-xs-12 col-sm-offset-4 col-sm-6 col-lg-5 col-lg-offset-5">
+					<div class = "chat">
+						<div class = "chat-messages" id = "chat-messages">
+						
+							<!--overall chat in here
+							<div class = "my_message">
+							</div>-->
+						</div>
+						
+						<textarea id = "textarea_message" placeholder = "Type your message:"></textarea>
+					
+					</div>
+				</div>	
+		</div>	
+		
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Latest compiled Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script src="/messages/myscripts.js"></script>			
+	</body>
 
-        <button type="submit" class="btn btn-warning btn-lg">Login</button>
-    </form>
-
-    <hr>
-
-    <p>Need an account? <a href="/signup">Signup</a></p>
-    <p>Or go <a href="/">home</a>.</p>
-
-</div>
-
-</div>
-</body>
 </html>
