@@ -1,6 +1,8 @@
 //This file only for routes. Application logic code is in controllers folder
 var path = require('path');
 var home = require(path.join(__dirname, 'controllers', 'home'));
+var messages = require(path.join(__dirname, 'controllers', 'messages'));
+
 
 module.exports = function(app) {
 
@@ -10,20 +12,12 @@ module.exports = function(app) {
     });
 
     //Messaging stuff
-    app.get('/messages', function(req, res){
-	  res.render('messages/messages.ejs');
-	});
-	
-    app.get('/mymessages', function(req, res){
-	  res.render('messages/myMessages.ejs');
-	});
-
-
-    app.get('/chat', function(req, res){
-	  res.render('messages/chat.ejs');
-	});
-	
-
+    app.get('/messages', messages.getMessages);	//send back messages page if logged in, or else alert message
+    app.get('/getemail', messages.getEmail);	//send back user email
+    
+    app.get('/participants', messages.getParticipants);	// get names of pariticipants at start of page
+	app.post('/specificmessages', messages.specificMessages); // get messages of specific participants
+	app.post('/sendmessages', messages.sendMessages); //  receive and update database when user sends messages
 
 	//Add in more routes like above...
 	app.post('/register', home.postUser);

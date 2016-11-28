@@ -1,4 +1,4 @@
-var email = "shafaaf.hossain@mail.utoronto.ca";
+var email = "";
 var participantId = 1;
 var selectedParticipant = "";
 var myPollBreak = false;
@@ -12,6 +12,18 @@ $(document).ready(function() {
 
     /*hide message box at beginning*/
 	$('#textarea_message').hide();
+
+	//Get all participant names at the beginning
+    $.ajax({
+        url: "/getemail",
+        type: "GET",
+        dataType: "json",
+        success: function (data) 
+        {
+        	console.log("email got back is ", data);
+        	email = data;
+        }
+    });    
 
     //Get all participant names at the beginning
     $.ajax({
@@ -141,7 +153,7 @@ $(document).ready(function() {
 		        myPoll();
 	      	}
 	    });
-	  }, 2000);
+	  }, 200);
 	}
 
 
@@ -171,7 +183,7 @@ $(document).ready(function() {
 		        dataType: "json",
 		        success: function (data) 
 		        {
-		        	console.log("Success.")
+		        	console.log("Success. Data sent back is ", data);
 		        }
 		    });    
 		}

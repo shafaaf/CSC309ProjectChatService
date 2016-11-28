@@ -1,19 +1,22 @@
+//REMEMBER: localhost and 127.0.0.1 difference
+
 var uniqueId = 0;
 
 //Todo: get proper email
+
 var fixedEmail = "shafaaf.hossain@mail.utoronto.ca";
 
 //------------------------------------------------------------------------------
 
 //Send back messages page if logged in, or else alert message to log in
-exports.getMessages = function (req, res) 
+exports.getMessages = function(req, res) 
 {
 	console.log("GET request for messages page");
 
 	//Todo: get proper email
-	var email = fixedEmail;
+	var email = req.session.email;
 
-	console.log("User's email is: " + email);	
+	console.log("User's email is: " , email);	
 	if(email == null){
 		res.send("Need to login");
 		return;
@@ -22,14 +25,23 @@ exports.getMessages = function (req, res)
 }
 
 //------------------------------------------------------------------------------
+//just send back user email
+exports.getEmail = function(req, res) {
+	console.log("GET request for user email");
+	var email = req.session.email;
+	res.json(email);
+}
 
-//Called from AJAX at begining
+
+//Called from AJAX at beginning to get names of participants
 exports.getParticipants = function (req, res) {
 	//Get session from req object later
 	console.log("GET request for participants");
 
 	//Todo: get proper email
-	var email = fixedEmail;
+	//var email = fixedEmail;
+	var email = req.session.email;
+
 	console.log("User's email is: " + email);
 	if(email == null){
 		res.send("Need to login");
@@ -56,9 +68,11 @@ exports.specificMessages = function (req, res) {
 	console.log("POST request for specific user messages");
 
 	//Todo: get proper email
-	var email = fixedEmail;
+	//var email = fixedEmail;
+	var email = req.session.email;
+
 	var participantName = req.body.participantName;
-	console.log("Query messages for user: " + email + " and with participant: " + participantName);
+	//console.log("Query messages for user: " + email + " and with participant: " + participantName);
 
 	//Getting messages with participant from database
 	var mongoUtil = require( '../mongoUtil' );
@@ -69,7 +83,7 @@ exports.specificMessages = function (req, res) {
 	messagesCollection.find({$or:[
 		{From: email, To: participantName}, {From: participantName, To: email}]
 		}).toArray(function(err, docs) {
-		console.log("specificMessages: messagesCollection: ", docs);
+		//console.log("specificMessages: messagesCollection: ", docs);
 		res.json(docs);
 		return;
 	});
@@ -82,7 +96,9 @@ exports.specificMessages = function (req, res) {
 exports.sendMessages = function (req, res) {
 
 	//Todo: get proper email
-	var email = fixedEmail;
+	//var email = fixedEmail;
+	var email = req.session.email;
+
 	var participantName = req.body.participantName;
 	var message = req.body.message;
 
@@ -99,6 +115,7 @@ exports.sendMessages = function (req, res) {
 	});
 
 	console.log("Inserted!");
+	res.json("DONE");
 	return;
 }
 
