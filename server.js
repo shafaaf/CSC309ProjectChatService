@@ -7,9 +7,7 @@ var session = require('express-session');
 var app = express();
 var http = require('http').Server(app);
 var path = require('path');
-var io = require('socket.io')(http)
 var bodyParser = require('body-parser');
-
 
 //-----------------------------------------------------------------------
 
@@ -19,19 +17,12 @@ app.use(express.static('public'));	//to use public folder for js, css stuff
 app.set('views', path.join(__dirname, 'views')); //add in views folder to find ejs files
 app.set('view engine', 'ejs'); // set up ejs for as templating engine
 
-//app.set('controllers', path.join(__dirname, 'controllers')); //add in views folder to find ejs files
-
-var sessionMiddleware = (session({
+app.use(session({
 	secret: 'aBFvZw82sHRPvX7L',
 	resave: false,
 	saveUninitialized: false
 }));
 
-io.use(function(socket, next) {
-    sessionMiddleware(socket.request, socket.request.res, next);
-});
-
-app.use(sessionMiddleware);
 
 //app.set('controllers', path.join(__dirname, 'controllers')); //add in views folder to find ejs files
 
@@ -39,6 +30,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 })); 
+
+
+
+//Setup database
+var mongoUtil = require('./mongoUtil');
+mongoUtil.connectToServer( function( err ) {
+	console.log("server.js:: Connected");
+} );
 
 //-----------------------------------------------------------------------
 
@@ -55,7 +54,7 @@ require('./routes.js')(app);
 //Chat room logic
 
 //If get error here its because mongodb not installed on your machin, so comment out this line.
-require('./controllers/chatRoom.js')(app, http, io);  
+//require('./controllers/chatRoom.js')(app);  
 
 //...more features here
 //require('./controllers/home.js')(app);  
