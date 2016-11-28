@@ -11,8 +11,12 @@ const config = {
 };
 var pool = new Pool(config);
 
+exports.getProfile = function (req, res) {
+
+}
+
 exports.edit = function(req, res) {
-  var userEmail = "not_in_db", // req.session.email,
+  var userEmail = req.session.email,
       firstName = (req.body.firstName).toLowerCase(),
       lastName = (req.body.lastName).toLowerCase(),
       subject = (req.body.subject).toLowerCase(),
@@ -34,8 +38,16 @@ exports.edit = function(req, res) {
         }
       });
     }
-    // else {
-
-    // }
+    else {
+      pool.query("UPDATE profiles SET firstname = $1, lastname = $2, subject = $3, role = $4 WHERE email = $5",
+                 [firstName, lastName, subject, role, userEmail], function(err, result) {
+        if (err) {
+          res.sendStatus(400);
+        } else {
+          console.log(result);
+          res.sendStatus(200);
+        }
+      })
+    }
   });
 }
