@@ -44,7 +44,6 @@ exports.edit = function(req, res) {
         if (err) {
           res.sendStatus(400);
         } else {
-          console.log(result);
           res.sendStatus(200);
         }
       })
