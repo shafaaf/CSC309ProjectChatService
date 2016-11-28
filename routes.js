@@ -14,6 +14,11 @@ module.exports = function(app) {
     res.render('chatRoom/chatRoom.ejs');
   });
 
+  // Profile page
+  app.get('/editprofile', function (req, res) {
+    res.render('profile/editprofile.ejs');
+  });
+
   //Add in more routes like above...
   app.post('/register', home.postUser);
 
