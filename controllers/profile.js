@@ -12,7 +12,16 @@ const config = {
 var pool = new Pool(config);
 
 exports.getProfile = function (req, res) {
-  res.render('profile/getprofile.ejs');
+  var userEmail = req.session.email;
+  pool.query('SELECT * FROM profiles WHERE email=$1', [userEmail], function (err, result) {
+    if (err) {
+      res.sendStatus(400);
+    } else {
+      req.session.firstName = result.rows[0].firstname;
+      console.log(req.session.firstName);
+      res.send(result.rows[0]);
+    }
+  });
 }
 
 exports.edit = function(req, res) {
