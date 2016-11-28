@@ -18,26 +18,26 @@ app.use(express.static('public'));	//to use public folder for js, css stuff
 app.set('views', path.join(__dirname, 'views')); //add in views folder to find ejs files
 app.set('view engine', 'ejs'); // set up ejs for as templating engine
 app.use(session({
-	secret: 'aBFvZw82sHRPvX7L',
-	resave: false,
-	saveUninitialized: false
+  secret: 'aBFvZw82sHRPvX7L',
+  resave: false,
+  saveUninitialized: false
 }));
 
 //app.set('controllers', path.join(__dirname, 'controllers')); //add in views folder to find ejs files
 
-app.use(bodyParser.json());   
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-	extended: true
-})); 
+  extended: true
+}));
 
 //-----------------------------------------------------------------------
 
 //Controllers
 
 /* Team: If want to add in a feature, add it in like the example below.
-Pass in the app, etc objects to the file needed and add in route in the routes folder.
-There should not be any controller/logic code here as it would get messy
-*/
+   Pass in the app, etc objects to the file needed and add in route in the routes folder.
+   There should not be any controller/logic code here as it would get messy
+   */
 
 //All routing logic
 require('./routes.js')(app);
@@ -45,15 +45,13 @@ require('./routes.js')(app);
 //Chat room logic
 
 //If get error here its because mongodb not installed on your machin, so comment out this line.
-//require('./controllers/chatRoom.js')(app, http, io);  
+//require('./controllers/chatRoom.js')(app, http, io);
 
 //...more features here
-//require('./controllers/home.js')(app);  
+//require('./controllers/home.js')(app);
 
 
 //-----------------------------------------------------------------------
-
-//Listen for connections on port 3000
 
 http.listen(3000, function(){
   console.log('listening on port 3000...');
