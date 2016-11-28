@@ -1,6 +1,7 @@
 //This file only for routes. Application logic code is in controllers folder
 var path = require('path');
 var home = require(path.join(__dirname, 'controllers', 'home'));
+var profile = require(path.join(__dirname, 'controllers', 'profile'));
 
 module.exports = function(app) {
 
@@ -18,6 +19,8 @@ module.exports = function(app) {
   app.get('/editprofile', function (req, res) {
     res.render('profile/editprofile.ejs');
   });
+
+  app.post('/editprofile', profile.edit);
 
   //Add in more routes like above...
   app.post('/register', home.postUser);
