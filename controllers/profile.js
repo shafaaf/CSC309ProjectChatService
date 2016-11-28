@@ -17,17 +17,24 @@ exports.edit = function(req, res) {
       lastName = (req.body.lastName).toLowerCase(),
       subject = (req.body.subject).toLowerCase(),
       role = (req.body.role).toLowerCase();
-  console.log(req.body);
 
-  pool.query('INSERT INTO profiles VALUES ($1, $2, $3, $4, $5)', [userEmail,
-                                                                  firstName,
-                                                                  lastName,
-                                                                  subject,
-                                                                  role], function(err) {
+  pool.query('SELECT * FROM profiles WHERE email=$1', [userEmail], function (err, result) {
     if (err) {
       res.sendStatus(400);
     } else {
-      res.sendStatus(200);
+      console.log(result);
     }
   });
+
+  // pool.query('INSERT INTO profiles VALUES ($1, $2, $3, $4, $5)', [userEmail,
+  //                                                                 firstName,
+  //                                                                 lastName,
+  //                                                                 subject,
+  //                                                                 role], function(err) {
+  //   if (err) {
+  //     res.sendStatus(400);
+  //   } else {
+  //     res.sendStatus(200);
+  //   }
+  // });
 }
