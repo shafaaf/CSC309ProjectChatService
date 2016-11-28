@@ -22,6 +22,8 @@ module.exports = function(app) {
 
   app.post('/editprofile', profile.edit);
 
+  app.get('/getprofile', profile.getProfile);
+
   //Add in more routes like above...
   app.post('/register', home.postUser);
 

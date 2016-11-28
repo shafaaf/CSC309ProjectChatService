@@ -12,7 +12,7 @@ const config = {
 var pool = new Pool(config);
 
 exports.getProfile = function (req, res) {
-
+  res.render('profile/getprofile.ejs');
 }
 
 exports.edit = function(req, res) {
