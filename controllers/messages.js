@@ -1,11 +1,19 @@
 var uniqueId = 0;
-//remove later and get from session
-var email = "shafaaf.hossain@mail.utoronto.ca";
+
+//Todo: get proper email
+var fixedEmail = "shafaaf.hossain@mail.utoronto.ca";
 
 //------------------------------------------------------------------------------
-exports.getMessages = function (req, res) {
-	console.log("GET request for messages");	
-	console.log("User's email is: " + email);
+
+//Send back messages page if logged in, or else alert message to log in
+exports.getMessages = function (req, res) 
+{
+	console.log("GET request for messages page");
+
+	//Todo: get proper email
+	var email = fixedEmail;
+
+	console.log("User's email is: " + email);	
 	if(email == null){
 		res.send("Need to login");
 		return;
@@ -20,21 +28,21 @@ exports.getParticipants = function (req, res) {
 	//Get session from req object later
 	console.log("GET request for participants");
 
-	
+	//Todo: get proper email
+	var email = fixedEmail;
 	console.log("User's email is: " + email);
 	if(email == null){
 		res.send("Need to login");
 		return;
 	}
 
+	//Get all participants for current user from database
 	var mongoUtil = require( '../mongoUtil' );
-	var db = mongoUtil.getDb();
-	
-	//Participants collection
+	var db = mongoUtil.getDb();	
 	var participantsCollection = db.collection("participants");
-	participantsCollection.find({Users: "shafaaf.hossain@mail.utoronto.ca"}).toArray(function(err, docs) {
-		console.log("participantsCollection: ");
-		console.log(docs);
+
+	participantsCollection.find({Users: email}).toArray(function(err, docs) {
+		console.log("getParticipants: participantsCollection: ", docs);
 		res.json(docs);
 		return;
 	});
@@ -42,25 +50,26 @@ exports.getParticipants = function (req, res) {
 
 //------------------------------------------------------------------------------
 
-//Todo: Called from AJAX when clicks on a user to see messages between him and selected messages
+//Called from AJAX to get messages for specific user
+//Happens when user clicks on a user to see messages, and then when polling 
 exports.specificMessages = function (req, res) {
-
-	var participantName = req.body.participantName;
 	console.log("POST request for specific user messages");
+
+	//Todo: get proper email
+	var email = fixedEmail;
+	var participantName = req.body.participantName;
 	console.log("Query messages for user: " + email + " and with participant: " + participantName);
 
 	//Getting messages with participant from database
 	var mongoUtil = require( '../mongoUtil' );
 	var db = mongoUtil.getDb();
 
-	//Participants collection
+	//Get all messages between current user and specific participant passed in from database
 	var messagesCollection = db.collection("messages");
 	messagesCollection.find({$or:[
 		{From: email, To: participantName}, {From: participantName, To: email}]
 		}).toArray(function(err, docs) {
-		
-		console.log("messagesCollection: ");
-		console.log(docs);
+		console.log("specificMessages: messagesCollection: ", docs);
 		res.json(docs);
 		return;
 	});
@@ -68,18 +77,20 @@ exports.specificMessages = function (req, res) {
 
 //---------------------------------------------------------------------------------
 
-//Adds in messages sent from user into database.
+//Add in messages sent from user into database.
 //User sends using AJAX calls when selecting a participant and writing text message and hitting enter.
 exports.sendMessages = function (req, res) {
+
+	//Todo: get proper email
+	var email = fixedEmail;
 	var participantName = req.body.participantName;
 	var message = req.body.message;
+
 	console.log("Recived message from:  " + email + ", to: " + participantName + ", with message: " + message);
 
-	//Inserting messages with participant into database
+	//Inserting message with current user and participant into database
 	var mongoUtil = require( '../mongoUtil' );
 	var db = mongoUtil.getDb();
-
-	//Messages collection
 	var messagesCollection = db.collection("messages");
 	messagesCollection.insertOne({
 		"From" : email,
@@ -93,4 +104,3 @@ exports.sendMessages = function (req, res) {
 
 //---------------------------------------------------------------------------------
 //Need a module to add new participant when someone gets messaged for the first time.
-
