@@ -13,13 +13,21 @@ var pool = new Pool(config);
 
 exports.edit = function(req, res) {
   var userEmail = req.session.email,
-      firstName = req.body.firstName,
-      lastName = req.body.lastName,
-      subject = req.body.subject,
-      role = req.body.role;
+      firstName = (req.body.firstName).toLowerCase(),
+      lastName = (req.body.lastName).toLowerCase(),
+      subject = (req.body.subject).toLowerCase(),
+      role = (req.body.role).toLowerCase();
   console.log(req.body);
 
-  // pool.query('INSERT INTO profiles VALUES ', function(err, result) {
-
-  // })
+  pool.query('INSERT INTO profiles VALUES ($1, $2, $3, $4, $5)', [userEmail,
+                                                                  firstName,
+                                                                  lastName,
+                                                                  subject,
+                                                                  role], function(err) {
+    if (err) {
+      res.sendStatus(400);
+    } else {
+      res.sendStatus(200);
+    }
+  });
 }
