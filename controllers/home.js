@@ -5,7 +5,7 @@ var google = require("googleapis");
 
 //Github OAuth
 var oauth2Github = require('simple-oauth2')({
-	clientID: '1434dc1219b6fafbded2', 
+	clientID: '1434dc1219b6fafbded2',
 	clientSecret: '9c8a3d291c6b4a7e3c4ba51569702ab51afa5bad',
 	site: 'https://github.com/login',
 	tokenPath: '/oauth/access_token',
@@ -14,7 +14,7 @@ var oauth2Github = require('simple-oauth2')({
 
 //Github url
 var authorization_uri_github = oauth2Github.authCode.authorizeURL({
-	redirect_uri: 'http://127.0.0.1:3000/callback/github', 
+	redirect_uri: 'http://127.0.0.1:3000/callback/github',
 	scope: 'user:email',
 	state: '*(A&S%f'
 });
@@ -23,11 +23,11 @@ var authorization_uri_github = oauth2Github.authCode.authorizeURL({
 var github = new gh({
     debug: true,
     protocol: "https",
-    host: "api.github.com", 
+    host: "api.github.com",
     headers: {
-        "user-agent": "csc309" 
+        "user-agent": "csc309"
     },
-    followRedirects: false, 
+    followRedirects: false,
     timeout: 50000
 });
 
@@ -88,7 +88,7 @@ exports.postSignin = function (req, res) {
 			//console.log(req.session.email);
 			res.sendStatus(200);
 		}
-		
+
 	});
 }
 
@@ -99,7 +99,7 @@ exports.getGithub = function (req, res) {
 exports.getCallbackGithub = function (req, res) {
 	var para = url.parse(req.url, true);
 	var code = para.query.code;
-	
+
 	oauth2Github.authCode.getToken({
 		code: code,
 		redirect_uri: 'http://127.0.0.1:3000/'
@@ -115,21 +115,21 @@ exports.getCallbackGithub = function (req, res) {
 exports.getAuthGithub = function (req, res) {
 	var path = (url.parse(req.url, true)).path;
 	var tok = path.split('?')[1];
-	
+
 	github.authenticate({
 		type: "oauth",
 		token: tok
 	});
-	
+
 	var headers = {"User-Agent" : "Timpan5"};
-	
+
 	rr({url : 'http://api.github.com/user/emails?' + tok, headers: headers}, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			req.session.email = (JSON.parse(body)[0].email).toLowerCase();
 			//console.log(req.session.email);
 			res.redirect('/');
 		}
-	}); 
+	});
 }
 
 exports.getSession = function (req, res) {

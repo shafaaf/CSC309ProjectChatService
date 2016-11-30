@@ -1,20 +1,5 @@
-/*
-id => #
-class => .
-*/
-
 body, textarea, input{
 	font-size:13px;
-}
-
-#participantList{
-	text-align: center;
-}
-
-#participantList div{
-	display: inline-block;
-	padding-left: 1%;
-	padding-right: 1%;
 }
 
 .chat{
@@ -56,7 +41,3 @@ body, textarea, input{
 .chat textarea, .chat-name{
 	outline:none;
 }
-
-
-
-

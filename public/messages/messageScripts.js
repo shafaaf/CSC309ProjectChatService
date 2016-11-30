@@ -39,7 +39,7 @@ $(document).ready(function() {
 
         	for(i = 0; i < numParticipants; i++)
         	{
-        		var participant = document.createElement("p");
+        		var participant = document.createElement("div");
         		var participantName;
 
         		//Get participant name
@@ -56,17 +56,20 @@ $(document).ready(function() {
 
         		//<span style="cursor:pointer">pointer</span><br>
 
-
+        		/*
         		var t = document.createTextNode(participantName);
         		participant.appendChild(t);
+        		*/
+        		participant.innerHTML = participantName;
 
         		var id = participantIdString + participantId;
-        		participantId= participantId + 1;
+        		participantId = participantId + 1;
         		participant.setAttribute("id", id);
         		participant.style.cursor = "pointer";
         		participant.addEventListener("click", function(){
         			specificMessages(this.id);
         		});
+
 
         		var participantList = document.getElementById("participantList");
         		participantList.appendChild(participant);
