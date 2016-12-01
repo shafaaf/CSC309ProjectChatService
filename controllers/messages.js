@@ -3,7 +3,7 @@
 var uniqueId = 0;
 
 //Todo: get proper email
-var email = "shafaaf.hossain@mail.utoronto.ca"; 
+//var email = "shafaaf.hossain@mail.utoronto.ca";
 
 //------------------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ exports.getMessages = function(req, res)
 	console.log("GET request for messages page");
 
 	//Todo: get proper email
-	//var email = req.session.email;
+	var email = req.session.email;
 
 	console.log("User's email is: " , email);	
 	if(email == null){
@@ -24,13 +24,15 @@ exports.getMessages = function(req, res)
 }
 
 //------------------------------------------------------------------------------
+
 //just send back user email
 exports.getEmail = function(req, res) {
 	console.log("GET request for user email");
-	//var email = req.session.email;
+	var email = req.session.email;
 	res.json(email);
 }
 
+//------------------------------------------------------------------------------
 
 //Called from AJAX at beginning to get names of participants
 exports.getParticipants = function (req, res) {
@@ -38,8 +40,8 @@ exports.getParticipants = function (req, res) {
 	console.log("GET request for participants");
 
 	//Todo: get proper email
-	//var email = fixedEmail;
-	//var email = req.session.email;
+	//var email = email;
+	var email = req.session.email;
 
 	console.log("User's email is: " + email);
 	if(email == null){
@@ -58,6 +60,38 @@ exports.getParticipants = function (req, res) {
 		return;
 	});
 }
+//------------------------------------------------------------------------------
+//Todo: add participant when tutor is clicked on for messaging
+exports.addParticipant = function(req, res)
+{
+	console.log("GET (for now) request for addParticipant");
+
+	//Todo: get proper email
+	//var email = "shafaaf2";
+	var email = req.session.email;
+
+	//var participantName = req.body.participantName;
+	participantName = "Ahsan";
+	console.log("participantName is " + participantName);
+
+	//Will add participant in the participants collection
+	var mongoUtil = require( '../mongoUtil' );
+	var db = mongoUtil.getDb();
+	var participantsCollection = db.collection("participants");
+
+	participantsCollection.insertOne({
+		Users: [email,participantName]
+	});
+
+	/*
+	messagesCollection.insertOne({
+		"From" : email,
+		"To" : participantName,
+		"Text" : message
+	});*/
+	return res.json("Added in participant.");
+}
+
 
 //------------------------------------------------------------------------------
 
@@ -68,7 +102,7 @@ exports.specificMessages = function (req, res) {
 
 	//Todo: get proper email
 	//var email = fixedEmail;
-	//var email = req.session.email;
+	var email = req.session.email;
 
 	var participantName = req.body.participantName;
 	//console.log("Query messages for user: " + email + " and with participant: " + participantName);
@@ -96,7 +130,7 @@ exports.sendMessages = function (req, res) {
 
 	//Todo: get proper email
 	//var email = fixedEmail;
-	//var email = req.session.email;
+	var email = req.session.email;
 
 	var participantName = req.body.participantName;
 	var message = req.body.message;
