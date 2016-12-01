@@ -7,23 +7,20 @@ body, textarea, input{
 	font-size:13px;
 }
 
-#participantList{
-	text-align: center;
-}
 
 #participantList div{
-	display: inline-block;
-	padding-left: 1%;
-	padding-right: 1%;
+	padding-bottom:3%;
 }
 
 .chat{
-	max-width:300px;
+	width:500px;
+	height: 400px;
 }
 
 .chat-messages, .chat textarea, .chat-name{
 	border:1px solid #bbb;
 }
+
 .chat-messages{
 	width:100%;
 	height:300px;
@@ -40,11 +37,8 @@ body, textarea, input{
 
 .chat textarea{
 	width:100%;
-	padding:10px;
-	border-top:0;
 	/*to prevent the textarea where message typed to br increased horizontally*/
-	max-width:100%;
-	
+
 }
 
 .chat-status
@@ -52,10 +46,6 @@ body, textarea, input{
 	color:#bbb; /*for grey color*/
 }
 
-/*Not needed: to remove the boxes being highlighted*/
-.chat textarea, .chat-name{
-	outline:none;
-}
 
 
 

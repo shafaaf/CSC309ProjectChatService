@@ -3,8 +3,7 @@
 var uniqueId = 0;
 
 //Todo: get proper email
-
-var fixedEmail = "shafaaf.hossain@mail.utoronto.ca";
+var email = "shafaaf.hossain@mail.utoronto.ca"; 
 
 //------------------------------------------------------------------------------
 
@@ -14,7 +13,7 @@ exports.getMessages = function(req, res)
 	console.log("GET request for messages page");
 
 	//Todo: get proper email
-	var email = req.session.email;
+	//var email = req.session.email;
 
 	console.log("User's email is: " , email);	
 	if(email == null){
@@ -28,7 +27,7 @@ exports.getMessages = function(req, res)
 //just send back user email
 exports.getEmail = function(req, res) {
 	console.log("GET request for user email");
-	var email = req.session.email;
+	//var email = req.session.email;
 	res.json(email);
 }
 
@@ -40,7 +39,7 @@ exports.getParticipants = function (req, res) {
 
 	//Todo: get proper email
 	//var email = fixedEmail;
-	var email = req.session.email;
+	//var email = req.session.email;
 
 	console.log("User's email is: " + email);
 	if(email == null){
@@ -69,7 +68,7 @@ exports.specificMessages = function (req, res) {
 
 	//Todo: get proper email
 	//var email = fixedEmail;
-	var email = req.session.email;
+	//var email = req.session.email;
 
 	var participantName = req.body.participantName;
 	//console.log("Query messages for user: " + email + " and with participant: " + participantName);
@@ -97,7 +96,7 @@ exports.sendMessages = function (req, res) {
 
 	//Todo: get proper email
 	//var email = fixedEmail;
-	var email = req.session.email;
+	//var email = req.session.email;
 
 	var participantName = req.body.participantName;
 	var message = req.body.message;

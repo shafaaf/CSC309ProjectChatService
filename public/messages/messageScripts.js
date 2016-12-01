@@ -61,6 +61,7 @@ $(document).ready(function() {
         		participant.appendChild(t);
         		*/
         		participant.innerHTML = participantName;
+        		
 
         		var id = participantIdString + participantId;
         		participantId = participantId + 1;
